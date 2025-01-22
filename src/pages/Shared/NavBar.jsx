@@ -2,13 +2,18 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useState } from "react";
+import { IoMdMenu } from "react-icons/io";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
-  const [dropdown, setDropdown] = useState(true);
+  const [dropdown, setDropdown] = useState(false);
+  const [open, setOpen] = useState();
 
   const handleDropDown = () => {
     setDropdown(!dropdown);
+  };
+  const handleNav = () => {
+    setOpen(!open);
   };
 
   const handleLogOut = () => {
@@ -16,7 +21,7 @@ const NavBar = () => {
   };
 
   const navOptions = (
-    <div className="flex gap-6 text-xl">
+    <div className="lg:flex gap-6 text-md space-y-4 lg:text-xl">
       <li>
         <Link to="/">Home</Link>
       </li>
@@ -49,10 +54,10 @@ const NavBar = () => {
             YourApp
           </span>
         </a>
-        <div className="flex items-center md:order-2  space-x-3 md:space-x-0 rtl:space-x-reverse border-2">
+        <div className="flex items-center md:order-2  space-x-3 md:space-x-0 rtl:space-x-reverse ">
           {user ? (
             <div
-              className="relative "
+              className="relative flex "
               // onMouseEnter={handleDropDown}
               // onMouseLeave={handleDropDown}
               onClick={handleDropDown}
@@ -60,11 +65,16 @@ const NavBar = () => {
               <img
                 src={user?.photoURL || "/default-avatar.jpg"}
                 alt="User Profile"
-                className="w-8 h-8 rounded-full"
+                className="w-8 h-8 rounded-full "
               />
+              <IoMdMenu className="lg:hidden" />
+
               {dropdown && (
-                <div className="absolute right-0 w-56 -mt-2 z-10 bg-white shadow-lg rounded-lg">
+                <div className="absolute right-0 lg:w-56 w-72 lg:-mt-2 mt-12 z-10 bg-white shadow-lg rounded-lg">
                   <ul className="p-5 space-y-4 text-md font-semibold">
+                    <span>
+                      <li>{navOptions}</li>
+                    </span>
                     <li>
                       <NavLink to="/dashboard">Dashboard</NavLink>
                     </li>

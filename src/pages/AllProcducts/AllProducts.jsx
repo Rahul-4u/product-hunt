@@ -77,7 +77,7 @@ export default function AllProducts() {
   );
 
   return (
-    <div className="w-[1440px] mx-auto">
+    <div className="max-w-[1440px] mx-auto">
       <div className="w-11/12 mx-auto my-6">
         <input
           type="text"
@@ -92,7 +92,7 @@ export default function AllProducts() {
         {total > 0 ? `${total} products found` : "No products found"}
       </p>
 
-      <div className="w-11/12 mx-auto grid grid-cols-3 gap-8">
+      <div className="w-11/12 mx-auto grid lg:grid-cols-3 md:grid-cols-2  gap-8">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <ProductCard

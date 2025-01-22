@@ -57,11 +57,11 @@ export default function ProductCard({
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+    <div className="bg-white w-11/12 lg:w-full shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
       <img
         src={product?.photo}
         alt={product?.name}
-        className="h-48 w-full object-cover"
+        className=" h-36 lg:h-48 w-full lg:object-cover"
       />
       <div className="p-4">
         <h2 className="text-xl font-bold text-gray-800">{product?.name}</h2>
