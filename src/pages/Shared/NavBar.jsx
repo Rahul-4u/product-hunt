@@ -21,7 +21,7 @@ const NavBar = () => {
   };
 
   const navOptions = (
-    <div className="lg:flex gap-6 text-md space-y-4 lg:text-xl">
+    <div className="lg:flex gap-6 text-md space-y-4  lg:space-y-0 items-center  lg:text-xl">
       <li>
         <Link to="/">Home</Link>
       </li>
@@ -31,7 +31,7 @@ const NavBar = () => {
 
       {user ? (
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to="/subscrip">Subscrip</Link>
         </li>
       ) : (
         <li>

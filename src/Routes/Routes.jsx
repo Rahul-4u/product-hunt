@@ -21,6 +21,7 @@ import Statistics from "../components/Admin/Statistics";
 import CuponAdd from "../components/Admin/CuponAdd";
 import CouponList from "../components/Admin/CouponList";
 import UpdateCoupon from "../components/Admin/UpdateCoupon";
+import SubscriptionPage from "../pages/Shared/SubscriptionPage";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/reviews-data/:id",
         element: <ReviewCard />,
+      },
+      {
+        path: "/subscrip",
+        element: <SubscriptionPage />,
       },
     ],
   },
