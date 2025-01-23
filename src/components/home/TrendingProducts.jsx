@@ -83,13 +83,13 @@ export default function TrendingProducts() {
                   </span>
                   <button
                     onClick={() => handleVotes(product._id, user._id)}
-                    className="btn bg-orange-400"
+                    className="btn bg-orange-400 flex items-center px-3 py-1 rounded-sm"
                   >
                     {" "}
                     <BiSolidUpvote />
                     {product.votes}
                   </button>
-                  <button className="btn btn-primary">
+                  <button className="btn bg-green-700 px-3 py-1 rounded-md">
                     <NavLink
                       to={`/all-product/${product._id}`}
                       className="text-white"

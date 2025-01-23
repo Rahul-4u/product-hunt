@@ -1,85 +1,110 @@
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 export default function Login() {
   const { login } = useAuth();
-  const navegate = useNavigate();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
+    setError("");
+    setLoading(true);
+
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
-    login(email, password).then((result) => {
+
+    try {
+      const result = await login(email, password);
       const user = result.user;
       console.log(user);
+
       Swal.fire({
-        title: "User Login Successful.",
-        showClass: {
-          popup: "animate__animated animate__fadeInDown",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
+        title: "Login Successful!",
+        text: "Welcome back!",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
       });
-      navegate("/");
-    });
+
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      setError("Invalid email or password.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-        </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form onSubmit={handleLogin} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="email"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="password"
-                className="input input-bordered"
-                required
-              />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
-            </div>
-          </form>
-          <div className="flex gap-4 text-sm  items-center justify-center ">
-            <p>Dont have an account ?</p>
-            <NavLink to={"/signUp"} className="text-sky-700   underline">
-              Register Now
-            </NavLink>
+    <div
+      style={{
+        backgroundImage: "url('https://i.ibb.co.com/kcjCvs4/download-38.jpg')",
+      }}
+      className="w-full  bg-cover object-cover bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 min-h-screen flex items-center justify-center"
+    >
+      <div className="card bg-white w-full max-w-md shadow-2xl p-6 rounded-lg">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
+          Login
+        </h1>
+        <p className="text-gray-600 text-center mb-6">
+          Welcome back! Please login to your account.
+        </p>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-gray-700">Email</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              className="input input-bordered w-full bg-gray-50 border border-gray-300 rounded-md p-3"
+              required
+            />
           </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-gray-700">Password</span>
+            </label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              className="input input-bordered w-full bg-gray-50 border border-gray-300 rounded-md p-3"
+              required
+            />
+            <label className="label">
+              <NavLink
+                to="/forgot-password"
+                className="text-sm text-sky-600 hover:underline"
+              >
+                Forgot password?
+              </NavLink>
+            </label>
+          </div>
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          <div className="form-control mt-6">
+            <button
+              type="submit"
+              className={`btn btn-primary w-full ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </div>
+        </form>
+        <div className="flex gap-2 text-sm justify-center items-center mt-4">
+          <p>Don’t have an account?</p>
+          <NavLink to="/signUp" className="text-sky-600 hover:underline">
+            Register Now
+          </NavLink>
         </div>
       </div>
     </div>

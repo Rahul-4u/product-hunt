@@ -8,9 +8,10 @@ import Admin from "../components/Admin/Admin";
 import useAdmin from "../hooks/useAdmin";
 import { useState } from "react";
 import { IoMdMenu } from "react-icons/io";
+import { IoHomeSharp, IoLogOut } from "react-icons/io5";
 
 export default function Dashboard() {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
   const [isModerator] = useModerator();
   const [isAdmin] = useAdmin();
   const navigate = useNavigate();
@@ -18,6 +19,10 @@ export default function Dashboard() {
 
   const handleNav = () => {
     setIsNav(!isNav);
+  };
+
+  const handleLogout = () => {
+    logOut();
   };
 
   // const isModerator = false;
@@ -50,11 +55,28 @@ export default function Dashboard() {
               <p className="text-sm">{user.email}</p>
             </div>
           )}
+          <hr className=" bg-black border-black border my-2 w-11/12 mx-auto" />
         </div>
         <div className="divider h-10"></div>
         {/* -------------------- */}
         <div className="px-8">
           {isAdmin ? <Admin /> : isModerator ? <Moderator /> : <NormalUser />}
+        </div>
+        <hr className=" bg-black border-black border my-2 w-11/12 mx-auto" />
+        <div className="px-8">
+          <NavLink to={"/"} className="flex items-center gap-4 my-2">
+            <IoHomeSharp />
+            Home
+          </NavLink>
+        </div>
+        <div className="px-8">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-4 my-2"
+          >
+            <IoLogOut />
+            Log-Out
+          </button>
         </div>
       </div>
       {isNav && (
@@ -75,7 +97,6 @@ export default function Dashboard() {
               </div>
             )}
           </div>
-          <div className="divider h-10"></div>
           {/* -------------------- */}
           <div className="px-8">
             {isAdmin ? <Admin /> : isModerator ? <Moderator /> : <NormalUser />}

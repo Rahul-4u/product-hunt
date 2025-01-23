@@ -129,7 +129,7 @@ export default function MyProducts() {
   return (
     <div>
       <h1>My Products</h1>
-      <div>
+      <div className=" overflow-x-auto">
         <p>Total Products: {products.length}</p>
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
@@ -146,8 +146,8 @@ export default function MyProducts() {
             </tr>
           </thead>
           <tbody>
-            {user.email &&
-              products.length &&
+            {user?.email &&
+              products?.length &&
               products?.map((product, index) => (
                 <tr key={index} className="hover:bg-gray-50">
                   <td className="border border-gray-300 px-4 py-2">

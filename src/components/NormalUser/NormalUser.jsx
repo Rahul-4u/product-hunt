@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import { FaShapes, FaShoppingCart, FaUser } from "react-icons/fa";
 import { MdAddShoppingCart } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function NormalUser() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("my-products");
+  }, [navigate]);
+
   return (
     <div>
       {" "}

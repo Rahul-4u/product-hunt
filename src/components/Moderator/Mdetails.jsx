@@ -26,7 +26,7 @@ export default function Mdetails() {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold">{product.name}</h1>
-      <img src={product.photo} alt={product.name} className="w-64 h-40 my-4" />
+      <img src={product?.photo} alt={product.name} className="w-64 h-40 my-4" />
       <p>
         <strong>Description:</strong> {product.description}
       </p>

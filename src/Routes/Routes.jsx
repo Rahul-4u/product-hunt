@@ -23,6 +23,7 @@ import CouponList from "../components/Admin/CouponList";
 import UpdateCoupon from "../components/Admin/UpdateCoupon";
 import SubscriptionPage from "../pages/Shared/SubscriptionPage";
 import Payment from "../pages/Shared/Payment";
+import ErrorPage from "../pages/Shared/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -122,6 +123,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);
 

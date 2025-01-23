@@ -60,7 +60,7 @@ export default function MyProfile() {
   //   }
   // };
 
-  const curentSubs = mens.find((item) => item.email === user.email);
+  const curentSubs = mens.find((item) => item?.email === user?.email);
 
   return (
     <div className="bg-slate-300 mx-6 p-5 min-h-screen">
@@ -70,12 +70,12 @@ export default function MyProfile() {
         {/* User Information */}
         <div className="text-center">
           <img
-            src={user.photoURL}
+            src={user?.photoURL}
             alt="User Profile"
             className="w-32 h-32 rounded-full mx-auto border-2 border-gray-500"
           />
-          <h1 className="text-xl font-semibold mt-3">{user.displayName}</h1>
-          <h1 className="text-sm text-gray-600">{user.email}</h1>
+          <h1 className="text-xl font-semibold mt-3">{user?.displayName}</h1>
+          <h1 className="text-sm text-gray-600">{user?.email}</h1>
         </div>
       </div>
 

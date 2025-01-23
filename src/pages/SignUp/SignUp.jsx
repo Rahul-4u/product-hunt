@@ -18,7 +18,6 @@ export default function SignUp() {
         const user = result.user;
         setUser(user);
 
-        // Update user profile and save to the database
         const userItem = {
           name: user?.displayName,
           photoURL: user?.photoURL,
@@ -78,73 +77,86 @@ export default function SignUp() {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center md-w-full lg:text-left">
-          <h1 className="text-5xl font-bold">Sign Up Now!</h1>
-          <p className="py-6">Create your account and enjoy our services.</p>
-        </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form onSubmit={signUpHandle} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Full Name</span>
+    <div
+      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('https://i.ibb.co.com/kcjCvs4/download-38.jpg')",
+      }}
+    >
+      <div className="bg-black bg-opacity-50 w-full py-6 text-center">
+        <h1 className="text-4xl font-extrabold text-white">
+          Create Your Account
+        </h1>
+        <p className="text-gray-300 mt-2">
+          Join us to access exclusive content and features!
+        </p>
+      </div>
+
+      <div className="flex justify-center items-center min-h-[80vh]">
+        <div className="bg-white bg-opacity-90 shadow-lg rounded-lg w-full max-w-lg p-8">
+          <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
+          <form onSubmit={signUpHandle} className="space-y-6">
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-700">
+                Full Name
               </label>
               <input
                 type="text"
                 name="name"
-                placeholder="Enter your Name"
-                className="input input-bordered"
+                placeholder="Enter your full name"
+                className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-200 focus:outline-none"
                 required
               />
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">User Photo</span>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-700">
+                Photo URL
               </label>
               <input
                 type="text"
                 name="photoURL"
                 placeholder="Enter your photo URL"
-                className="input input-bordered"
+                className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-200 focus:outline-none"
                 required
               />
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-700">
+                Email
               </label>
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
-                className="input input-bordered"
+                placeholder="Enter your email"
+                className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-200 focus:outline-none"
                 required
               />
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-700">
+                Password
               </label>
               <input
                 type="password"
                 name="password"
-                placeholder="Password"
-                className="input input-bordered"
+                placeholder="Enter your password"
+                className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-200 focus:outline-none"
                 required
               />
             </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Sign Up</button>
-            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+            >
+              Create Account
+            </button>
           </form>
-          <div className="form-control mx-auto w-10/12  mb-6">
+          <div className="text-center mt-6">
             <button
               onClick={googleloginHandle}
-              className="btn  btn-outline btn-primary"
+              className="bg-red-500 text-white py-2 px-4 rounded-lg flex items-center gap-2 justify-center w-full hover:bg-red-600"
             >
-              <FaGoogle />
-              Sign Up with Google
+              <FaGoogle /> Sign Up with Google
             </button>
           </div>
         </div>
