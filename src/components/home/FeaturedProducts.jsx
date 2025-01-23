@@ -79,17 +79,17 @@ export default function FeaturedProducts() {
                 </div>
                 <div className="mt-4 flex items-center gap-4">
                   <span className="text-lg font-semibold text-primary">
-                    {product.price}
+                    $Price: {product.price}
                   </span>
                   <button
                     onClick={() => handleVotes(product._id, user._id)}
-                    className="btn bg-orange-400"
+                    className="btn flex items-center px-1 rounded-sm bg-orange-400"
                   >
                     {" "}
                     <BiSolidUpvote />
                     {product.votes}
                   </button>
-                  <button className="btn btn-primary">
+                  <button className="btn  bg-green-700 px-3 py-1 rounded-md">
                     <NavLink
                       to={`/all-product/${product._id}`}
                       className="text-white"

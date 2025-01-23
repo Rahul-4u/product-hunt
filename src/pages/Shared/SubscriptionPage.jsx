@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const SubscriptionPage = () => {
   const [couponCode, setCouponCode] = useState("");
@@ -26,9 +27,12 @@ const SubscriptionPage = () => {
               <li>Access to all tech products</li>
               <li>Upvote functionality</li>
             </ul>
-            <button className="bg-green-500 text-white mt-6 py-2 px-4 rounded hover:bg-green-600">
+            <NavLink
+              to={"/payment"}
+              className="bg-green-500 text-white mt-6 py-2 px-4 rounded hover:bg-green-600"
+            >
               Subscribe Now
-            </button>
+            </NavLink>
           </div>
 
           {/* Premium Plan */}
@@ -69,13 +73,13 @@ const SubscriptionPage = () => {
       </section>
 
       {/* Payment Section */}
-      <section className="mt-12 text-center">
+      {/* <section className="mt-12 text-center">
         <h3 className="text-2xl font-semibold">Payment</h3>
         <p className="mt-4 text-xl">Total: ${20 - discount}/month</p>
         <button className="bg-orange-500 text-white py-2 px-6 rounded mt-4 hover:bg-orange-600">
-          Proceed to Payment
+          <NavLink to={"/payment"}>Proceed to Payment</NavLink>
         </button>
-      </section>
+      </section> */}
 
       {/* Footer */}
     </div>

@@ -22,6 +22,7 @@ import CuponAdd from "../components/Admin/CuponAdd";
 import CouponList from "../components/Admin/CouponList";
 import UpdateCoupon from "../components/Admin/UpdateCoupon";
 import SubscriptionPage from "../pages/Shared/SubscriptionPage";
+import Payment from "../pages/Shared/Payment";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/subscrip",
         element: <SubscriptionPage />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
       },
     ],
   },
