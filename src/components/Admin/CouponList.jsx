@@ -103,15 +103,15 @@ export default function CouponList() {
           <tbody>
             {coupons.length > 0 ? (
               coupons.map((coupon) => (
-                <tr key={coupon._id}>
-                  <td className="border px-4 py-2">{coupon.code}</td>
-                  <td className="border px-4 py-2">{coupon.discount}%</td>
-                  <td className="border px-4 py-2">{coupon.description}</td>
+                <tr key={coupon?._id}>
+                  <td className="border px-4 py-2">{coupon?.code}</td>
+                  <td className="border px-4 py-2">{coupon?.discount}%</td>
+                  <td className="border px-4 py-2">{coupon?.description}</td>
                   <td className="border px-4 py-2">
-                    {new Date(coupon.expirationDate).toLocaleDateString()}
+                    {new Date(coupon?.expirationDate).toLocaleDateString()}
                   </td>
                   <td className="border px-4 py-2  capitalize">
-                    {coupon.status}
+                    {coupon?.status}
                   </td>
                   <td className="border px-4 py-2 flex gap-2">
                     <button
@@ -127,10 +127,10 @@ export default function CouponList() {
                       Active
                     </button>
                     <button
-                      // onClick={() => handleInActive(coupon?._id)}
+                      // onClick={() => handleInActive(coupon??._id)}
                       className=" bg-green-600 text-white px-3 py-1 rounded"
                     >
-                      <NavLink to={`/dashboard/coupon-update/${coupon._id}`}>
+                      <NavLink to={`/dashboard/coupon?-update/${coupon?._id}`}>
                         Edite
                       </NavLink>
                     </button>

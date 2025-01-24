@@ -20,7 +20,7 @@ const SubscriptionPage = () => {
       <section className="flex justify-center mt-12 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Basic Plan */}
-          <div className="bg-white shadow-lg rounded-lg p-6">
+          {/* <div className="bg-white shadow-lg rounded-lg p-6">
             <h3 className="text-xl font-semibold">Basic Plan</h3>
             <p className="text-lg mt-2">$10/month</p>
             <ul className="mt-4 list-disc pl-6 text-gray-700">
@@ -33,7 +33,7 @@ const SubscriptionPage = () => {
             >
               Subscribe Now
             </NavLink>
-          </div>
+          </div> */}
 
           {/* Premium Plan */}
           <div className="bg-white shadow-lg rounded-lg p-6">

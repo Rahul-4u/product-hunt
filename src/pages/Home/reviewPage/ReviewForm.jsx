@@ -5,7 +5,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 export default function ReviewForm({ daynamicId }) {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const { displayName, photoURL, email } = user;
+  // const { displayName, photoURL, email } = user;
 
   const handleReview = async (e) => {
     e.preventDefault();
@@ -16,9 +16,9 @@ export default function ReviewForm({ daynamicId }) {
     const addReview = {
       comment,
       rating,
-      displayName,
-      photoURL,
-      email,
+      displayName: user?.displayName,
+      photoURL: user?.photoURL,
+      email: user?.email,
       daynamicId,
     };
     try {
@@ -38,7 +38,7 @@ export default function ReviewForm({ daynamicId }) {
       <form onSubmit={handleReview}>
         <textarea
           placeholder="Enter your review"
-          className=" border-2  w-1/3 h-32"
+          className=" border-2  md:w-1/3 md:h-32"
           name="comment"
         ></textarea>
         <div>

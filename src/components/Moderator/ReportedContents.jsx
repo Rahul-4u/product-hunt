@@ -89,19 +89,19 @@ export default function ReportedContents() {
 
                 <td className="px-6 py-4 border-b border-gray-200">
                   <button className="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600">
-                    <NavLink to={`/dashboard/report-products/${product._id}`}>
+                    <NavLink to={`/dashboard/report-products/${product?._id}`}>
                       View Details
                     </NavLink>
                   </button>
                   <button
                     className=" bg-green-500 text-white px-4 mx-2 py-2 rounded hover:bg-red-600"
-                    onClick={() => handleReport(product._id)}
+                    onClick={() => handleReport(product?._id)}
                   >
                     Resolve Report
                   </button>
                   <button
                     className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                    onClick={() => handleDelete(product._id)}
+                    onClick={() => handleDelete(product?._id)}
                   >
                     Delete
                   </button>

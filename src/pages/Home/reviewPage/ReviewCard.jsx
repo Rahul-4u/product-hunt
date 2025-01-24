@@ -19,16 +19,16 @@ export default function ReviewCard({ perenId }) {
   });
 
   // Filter products that match the perenId
-  const filteredProducts = products.filter(
+  const filteredProducts = products?.filter(
     (product) => product.daynamicId === perenId
   );
 
   return (
     <div>
-      <h2>ReviewCard {filteredProducts.length}</h2>
+      <h2>ReviewCard {filteredProducts?.length}</h2>
       <div>
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product, index) => (
+        {filteredProducts?.length > 0 ? (
+          filteredProducts?.map((product, index) => (
             <figure
               key={index}
               className="max-w-screen-md md:border-2 md:p-4  md:my-4 md:rounded-md"
@@ -44,22 +44,22 @@ export default function ReviewCard({ perenId }) {
               </div>
               <Blockquote>
                 <p className="text-2xl font-semibold text-gray-900 dark:text-white">
-                  {product.comment}
+                  {product?.comment}
                 </p>
               </Blockquote>
               <figcaption className="mt-6 flex items-center space-x-3">
                 <img
                   className="w-10 h-10 rounded-full"
-                  src={product.photoURL}
+                  src={product?.photoURL}
                   alt=""
                 />
 
                 <div className="flex items-center divide-x-2 divide-gray-300 dark:divide-gray-700">
                   <cite className="pr-3 font-medium text-gray-900 dark:text-white">
-                    {product.displayName}
+                    {product?.displayName}
                   </cite>
                   <cite className="pl-3 text-sm text-gray-500 dark:text-gray-400">
-                    {product.email}
+                    {product?.email}
                   </cite>
                 </div>
               </figcaption>
