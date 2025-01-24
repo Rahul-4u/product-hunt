@@ -6,9 +6,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 export default function NormalUser() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate("my-products");
-  }, [navigate]);
+  // useEffect(() => {
+  //   navigate("my-products");
+  // }, [navigate]);
 
   return (
     <div>

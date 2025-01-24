@@ -2,65 +2,75 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-gray-300 py-8">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Section 1: About */}
+    <footer className="bg-gray-800 text-gray-300 py-8 ">
+      <div className="container  max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Section 1: Logo and About */}
         <div>
-          <h2 className="text-xl font-semibold text-white mb-4">About Us</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">Product Hunt</h2>
           <p className="text-sm">
-            Welcome to Product Hunt, the best platform to explore and share the
-            most innovative products. Our goal is to connect creators with users
-            and bring ideas to life.
+            Discover and share the most innovative products. Our mission is to
+            connect creators with users and bring innovative ideas to life.
           </p>
         </div>
 
-        {/* Section 2: Quick Links */}
+        {/* Section 2: Contact Information */}
         <div>
-          <h2 className="text-xl font-semibold text-white mb-4">Quick Links</h2>
-          <ul className="space-y-2">
+          <h2 className="text-xl font-semibold text-white mb-4">Contact Us</h2>
+          <ul className="space-y-2 text-sm">
             <li>
-              <a href="/about" className="hover:text-white">
-                About
+              Email:{" "}
+              <a
+                href="mailto:support@producthunt.com"
+                className="hover:text-white"
+              >
+                support@producthunt.com
               </a>
             </li>
             <li>
-              <a href="/contact" className="hover:text-white">
-                Contact
+              Phone:{" "}
+              <a href="tel:+880123456789" className="hover:text-white">
+                +880123456789
               </a>
             </li>
-            <li>
-              <a href="/terms" className="hover:text-white">
-                Terms & Conditions
-              </a>
-            </li>
-            <li>
-              <a href="/privacy" className="hover:text-white">
-                Privacy Policy
-              </a>
-            </li>
+            <li>Address: Dhaka Tower, Level 4, Dhaka, Bangladesh</li>
           </ul>
         </div>
 
-        {/* Section 3: Subscribe */}
+        {/* Section 3: Social Media Links */}
         <div>
-          <h2 className="text-xl font-semibold text-white mb-4">Subscribe</h2>
-          <p className="text-sm mb-4">
-            Stay updated with the latest products and trends. Subscribe to our
-            newsletter!
-          </p>
-          <form className="flex flex-col sm:flex-row">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="px-4 py-2 rounded-l-md focus:outline-none text-gray-800"
-            />
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600"
-            >
-              Subscribe
-            </button>
-          </form>
+          <h2 className="text-xl font-semibold text-white mb-4">Follow Us</h2>
+          <ul className="flex space-x-4 text-lg">
+            <li>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white"
+              >
+                <i className="fab fa-facebook"></i> Facebook
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white"
+              >
+                <i className="fab fa-twitter"></i> Twitter
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white"
+              >
+                <i className="fab fa-instagram"></i> Instagram
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
