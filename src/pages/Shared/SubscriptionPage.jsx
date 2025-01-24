@@ -20,7 +20,7 @@ const SubscriptionPage = () => {
       <section className="flex justify-center mt-12 px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Basic Plan */}
-          {/* <div className="bg-white shadow-lg rounded-lg p-6">
+          <div className="bg-white shadow-lg rounded-lg p-6">
             <h3 className="text-xl font-semibold">Basic Plan</h3>
             <p className="text-lg mt-2">$10/month</p>
             <ul className="mt-4 list-disc pl-6 text-gray-700">
@@ -33,10 +33,10 @@ const SubscriptionPage = () => {
             >
               Subscribe Now
             </NavLink>
-          </div> */}
+          </div>
 
           {/* Premium Plan */}
-          <div className="bg-white shadow-lg rounded-lg p-6">
+          {/* <div className="bg-white shadow-lg rounded-lg p-6">
             <h3 className="text-xl font-semibold">Premium Plan</h3>
             <p className="text-lg mt-2">$20/month</p>
             <ul className="mt-4 list-disc pl-6 text-gray-700">
@@ -47,10 +47,10 @@ const SubscriptionPage = () => {
             <button className="bg-green-500 text-white mt-6 py-2 px-4 rounded hover:bg-green-600">
               Subscribe Now
             </button>
-          </div>
+          </div> */}
 
           {/* Coupon Section */}
-          <div className="bg-white shadow-lg rounded-lg p-6">
+          {/* <div className="bg-white shadow-lg rounded-lg p-6">
             <h3 className="text-xl font-semibold">Have a Coupon Code?</h3>
             <input
               type="text"
@@ -68,7 +68,7 @@ const SubscriptionPage = () => {
             {discount > 0 && (
               <p className="text-green-500 mt-2">Discount: ${discount}</p>
             )}
-          </div>
+          </div> */}
         </div>
       </section>
 

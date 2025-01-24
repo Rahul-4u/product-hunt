@@ -39,26 +39,26 @@ export default function MyProfile() {
     },
   });
 
-  // const handlsubs = async () => {
-  //   try {
-  //     const res = await axiosPublic.patch(
-  //       `/user-sub`,
-  //       { email: user.email },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-  //         },
-  //       }
-  //     );
-  //     if (res.status === 200) {
-  //       alert("Product status updated to Accepted!");
-  //       refetch();
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to update status:", error.message);
-  //     alert("Failed to accept the product. Please try again.");
-  //   }
-  // };
+  const handlsubs = async () => {
+    try {
+      const res = await axiosPublic.patch(
+        `/user-sub`,
+        { email: user.email },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
+      );
+      if (res.status === 200) {
+        alert("Product status updated to Accepted!");
+        refetch();
+      }
+    } catch (error) {
+      console.error("Failed to update status:", error.message);
+      alert("Failed to accept the product. Please try again.");
+    }
+  };
 
   const curentSubs = mens.find((item) => item?.email === user?.email);
 
@@ -82,7 +82,7 @@ export default function MyProfile() {
       {/* Conditional Rendering for Subscription */}
       <div className="mt-10 text-center">
         <div>
-          <NavLink to={"/subscrip"}>{curentSubs?.subs}</NavLink>
+          <NavLink onClick={handlsubs}>{curentSubs?.subs}</NavLink>
         </div>
       </div>
     </div>

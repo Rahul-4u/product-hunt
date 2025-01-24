@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   // Predefined tags
   const predefinedTags = [
@@ -72,20 +75,13 @@ export default function AddProduct() {
     };
 
     try {
-      const response = await axiosSecure.post(
-        "/product",
-        productItem
-        // {},
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-        //   },
-        // }
-      );
+      const response = await axiosSecure.post("/product", productItem);
       if (response.data.success) {
         alert("Product added successfully!");
         form.reset();
         setSelectedTags([]);
+        toast.success("your product post success");
+        navigate("/my-products");
       }
     } catch (error) {
       console.error("Error adding product:", error);
