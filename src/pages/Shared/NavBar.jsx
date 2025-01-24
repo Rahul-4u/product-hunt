@@ -46,12 +46,13 @@ const NavBar = () => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8"
+            src="https://i.ibb.co.com/hM6kz3D/images-11-removebg-preview.png"
+            className="h-10"
             alt="Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            YourApp
+            <span className="text-orange-600 font-bold italic">Pro</span>duct
+            Hunt
           </span>
         </a>
         <div className="flex items-center md:order-2  space-x-3 md:space-x-0 rtl:space-x-reverse ">
