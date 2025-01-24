@@ -24,6 +24,7 @@ import UpdateCoupon from "../components/Admin/UpdateCoupon";
 import SubscriptionPage from "../pages/Shared/SubscriptionPage";
 import Payment from "../pages/Shared/Payment";
 import ErrorPage from "../pages/Shared/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-product/:id",
-        element: <HomeAllCardDetails />,
+        element: (
+          <PrivateRoute>
+            <HomeAllCardDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/reviews-data/:id",
@@ -59,15 +64,27 @@ const router = createBrowserRouter([
 
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "my-profile",
-        element: <MyProfile />,
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/pending-products/:id",
-        element: <Mdetails />,
+        element: (
+          <PrivateRoute>
+            <Mdetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/report-products/:id",
@@ -83,7 +100,12 @@ const router = createBrowserRouter([
       },
       {
         path: "add-product",
-        element: <AddProduct />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <AddProduct />,
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-products",
