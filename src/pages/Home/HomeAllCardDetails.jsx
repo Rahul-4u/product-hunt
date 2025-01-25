@@ -26,12 +26,16 @@ export default function HomeAllCardDetails() {
     enabled: !!id,
   });
 
-  const handleVotes = async (id) => {
-    const userId = localStorage.getItem(user._id);
+  const handleVotes = async (productId) => {
+    if (!user?._id) {
+      alert("Please log in to vote.");
+      return;
+    }
+
     try {
       const res = await axiosPublic.patch(
-        `/product-votes/${id}`,
-        { userId },
+        `/product-votes/${productId}`,
+        { userId: user._id },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access-token")}`,
@@ -40,42 +44,19 @@ export default function HomeAllCardDetails() {
       );
       if (res.status === 200) {
         refetch();
+        alert("Vote submitted successfully!");
       }
     } catch (error) {
-      console.error("Failed to update status:", error.message);
+      console.error("Failed to update votes:", error.message);
+      alert("An error occurred while submitting your vote. Please try again.");
     }
   };
-
-  // const handleVotes = async (id) => {
-  //   const userId = user?._id || localStorage.getItem("user-id");
-  //   if (!userId) {
-  //     console.error("User ID not found.");
-  //     return;
-  //   }
-
-  //   try {
-  //     const res = await axiosPublic.patch(
-  //       `/product-votes/${id}`,
-  //       { userId },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-  //         },
-  //       }
-  //     );
-  //     if (res.status === 200) {
-  //       refetch(); // Assuming refetch is defined
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to update votes:", error.message);
-  //   }
-  // };
 
   if (isLoading) return <div className="text-center">Loading...</div>;
   if (isError)
     return (
       <div className="text-center text-red-500">
-        Error loading product details.
+        Error loading product details. Please try again later.
       </div>
     );
 
@@ -85,15 +66,11 @@ export default function HomeAllCardDetails() {
     description,
     websiteLink,
     timestamp,
-    status,
-    email,
+    votes,
     price,
     condition,
     ownerName,
     ownerImage,
-
-    votes,
-    _id,
   } = product;
 
   return (
@@ -102,73 +79,51 @@ export default function HomeAllCardDetails() {
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
         <div className="p-6 border-2">
           <div className="flex justify-between">
-            {" "}
             <img
-              src={photo}
+              src={photo || "/default-product.jpg"}
               alt={name}
               className="w-1/5 rounded-md md:h-32 object-cover"
             />
             <div className="flex gap-2">
               <Button.Group>
                 <Button color="gray">
-                  {" "}
-                  <span>
-                    <LiaExternalLinkAltSolid className="text-xl" />
-                  </span>{" "}
-                  Visit
+                  <LiaExternalLinkAltSolid className="mr-1" />
+                  <a
+                    href={websiteLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit Website
+                  </a>
                 </Button>
-              </Button.Group>{" "}
-              <Button.Group onClick={() => handleVotes(product._id)}>
-                <Button color="gray">
-                  {" "}
-                  <span>
-                    <BiSolidUpvote className="text-xl" />
-                  </span>{" "}
-                  Votes {votes}
+                <Button onClick={() => handleVotes(id)} color="success">
+                  <BiSolidUpvote className="mr-1" />
+                  {votes || 0} Votes
                 </Button>
               </Button.Group>
             </div>
           </div>
-          <h1 className="text-2xl font-bold mb-2">{name}</h1>
-          <p className="text-gray-600 mb-4">{description}</p>
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-xl font-semibold text-green-600">
-              ${price}
-            </span>
-            <span className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full">
-              {condition}
-            </span>
-          </div>
-          {/* Seller Info */}
-          <div className="border-t pt-4 mt-4">
-            <h2 className="font-semibold text-lg">Seller Information</h2>
-            <p>
-              Name: <span className="font-medium">{ownerName}</span>
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold">{name}</h2>
+            <p className="text-gray-600">{description}</p>
+            <p className="mt-2">
+              <strong>Condition:</strong> {condition || "Not specified"}
             </p>
             <p>
-              Email: <span className="font-medium">{email}</span>
+              <strong>Price:</strong> ${price || "Contact for pricing"}
             </p>
-            {/* {isVerified && (
-              <span className="inline-block mt-2 px-3 py-1 bg-green-100 text-green-600 rounded-full">
-                Verified Seller
-              </span>
-            )} */}
-          </div>
-          {/* Action Buttons */}
-          <div className="mt-6 flex gap-4">
-            <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-              Book Now
-            </button>
-            <button className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-              Report Issue
-            </button>
-          </div>
-          <div className="divider"></div>
-          <div className="mt-5 ">
-            <ProductComment daynamicId={_id} />
+            <p>
+              <strong>Owner:</strong> {ownerName || "Unknown"}
+            </p>
+            <p className="text-gray-500 text-sm">
+              Posted on: {new Date(timestamp).toLocaleString()}
+            </p>
           </div>
         </div>
       </div>
+
+      {/* Product Comments */}
+      <ProductComment productId={id} />
     </div>
   );
 }
