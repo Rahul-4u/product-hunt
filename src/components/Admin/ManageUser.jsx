@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function ManageUser() {
   const axiosSecure = useAxiosSecure();
@@ -18,85 +19,72 @@ export default function ManageUser() {
   });
 
   const handleMakeAdmin = async (user) => {
-    try {
-      const token = localStorage.getItem("access-token");
-      if (!token) {
-        alert("No access token found!");
-        return;
-      }
+    const confirmAdmin = confirm(
+      `Are you sure you want to make ${user.name} an Admin?`
+    );
 
-      const res = await axiosSecure.patch(
-        `/users/admin/${user._id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    if (confirmAdmin) {
+      try {
+        const token = localStorage.getItem("access-token");
+        if (!token) {
+          alert("No access token found!");
+          refetch();
+          return;
         }
-      );
 
-      if (res.data.modifiedCount > 0) {
-        refetch();
-        alert(`${user.name} has been made an Admin`);
+        const res = await axiosSecure.patch(
+          `/users/admin/${user._id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          alert(`${user.name} has been made an Admin`);
+        }
+      } catch (error) {
+        console.error("Error making admin:", error.message);
       }
-    } catch (error) {
-      console.error("Error making admin:", error.message);
     }
   };
 
   const handleMakeModerator = async (user) => {
-    try {
-      const token = localStorage.getItem("access-token");
-      if (!token) {
-        alert("No access token found!");
-        return;
-      }
+    const confirmModerator = confirm(
+      `Are you sure you want to make ${user.name} a Moderator?`
+    );
 
-      const res = await axiosSecure.patch(
-        `/users/moderator/${user._id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    if (confirmModerator) {
+      try {
+        const token = localStorage.getItem("access-token");
+        if (!token) {
+          alert("No access token found!");
+          refetch();
+          return;
         }
-      );
 
-      if (res.data.modifiedCount > 0) {
-        refetch();
-        alert(`${user.name} has been made a Moderator`);
+        const res = await axiosSecure.patch(
+          `/users/moderator/${user._id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          alert(`${user.name} has been made a Moderator`);
+        }
+      } catch (error) {
+        console.error("Error making moderator:", error.message);
       }
-    } catch (error) {
-      console.error("Error making moderator:", error.message);
     }
   };
-  // const handleMakeModerator = async (user) => {
-  //   const confirmDelete = confirm(
-  //     `Are you sure you want to delete ${user.name}?`
-  //   );
-  //   if (confirmDelete) {
-  //     try {
-  //       const token = localStorage.getItem("access-token");
-  //       if (!token) {
-  //         alert("No access token found!");
-  //         return;
-  //       }
-
-  //       const res = await axiosSecure.patch(`/users/moderator/${user._id}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-
-  //       if (res.data.deletedCount > 0) {
-  //         refetch();
-  //         alert(`${user.name} has been deleted successfully`);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error deleting user:", error.message);
-  //     }
-  //   }
-  // };
 
   const handleDeleteUser = async (user) => {
     const confirmDelete = confirm(

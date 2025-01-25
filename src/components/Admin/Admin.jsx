@@ -1,9 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MdManageAccounts } from "react-icons/md";
 import { FcAddDatabase, FcStatistics } from "react-icons/fc";
 import { BsCardChecklist } from "react-icons/bs";
+import useAdmin from "../../hooks/useAdmin";
+import { useEffect } from "react";
 
 export default function Admin() {
+  const [isAdmin] = useAdmin();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAdmin) {
+      navigate("statistics-admin");
+    }
+  }, [isAdmin, navigate]);
   return (
     <div>
       <h1 className="text-xl font-semibold mb-4 space-y-8 text-white">Admin</h1>

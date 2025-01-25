@@ -107,6 +107,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       {
         path: "my-products",
         element: <MyProducts />,
@@ -120,6 +121,7 @@ const router = createBrowserRouter([
         path: "statistics-admin",
         element: <Statistics />,
       },
+
       {
         path: "add-cupon",
         element: <CuponAdd />,

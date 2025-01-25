@@ -39,7 +39,7 @@ export default function Dashboard() {
           <IoMdMenu className="text-xl h-8 w-8 p-1 rounded-full border " />
         </button>
       </div>
-      <div className="w-64 min-h-screen lg:flex lg:flex-col hidden  bg-green-500  bg-gradient-to-t from-sky-500 to-blue-500">
+      <div className="w-64 min-h-screen lg:flex lg:flex-col   bg-green-500  bg-gradient-to-t from-sky-500 to-blue-500">
         <div className="w-full mx-auto">
           <h1></h1>
           {user?.email && (

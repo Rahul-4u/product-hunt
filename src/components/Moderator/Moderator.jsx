@@ -1,12 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { MdNotificationImportant } from "react-icons/md";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import { MdPendingActions } from "react-icons/md";
+import useModerator from "../../hooks/useModerator";
+import { useEffect } from "react";
 
 export default function Moderator() {
   const axiosPublic = useAxiosPublic();
+  const [isModerator] = useModerator();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isModerator) {
+      navigate("pending-products");
+    }
+  }, [isModerator, navigate]);
 
   const { data: products = [], refetch } = useQuery({
     queryKey: ["products", true],

@@ -74,7 +74,7 @@ const NavBar = () => {
                 <div className="absolute right-0 lg:w-56 w-72 lg:-mt-2 mt-12 z-10 bg-white shadow-lg rounded-lg">
                   <ul className="p-5 space-y-4 text-md font-semibold">
                     <span>
-                      <li>{navOptions}</li>
+                      <li className="lg:hidden">{navOptions}</li>
                     </span>
                     <li>
                       <NavLink to="/dashboard">Dashboard</NavLink>
@@ -91,7 +91,7 @@ const NavBar = () => {
           )}
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+          <ul className="menu menu-horizontal px-1">{navOptions} </ul>
         </div>
       </div>
     </nav>
