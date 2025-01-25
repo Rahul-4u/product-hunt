@@ -3,11 +3,16 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { BiSolidUpvote } from "react-icons/bi";
 import useAuth from "../../hooks/useAuth";
 import { NavLink } from "react-router-dom";
+import useLoadingSpinner from "../../hooks/useLoadingSpinner";
 
 export default function FeaturedProducts() {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const { data: products = [], refetch } = useQuery({
+  const {
+    data: products = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["products", true],
     queryFn: async () => {
       const res = await axiosPublic.get(`/product-featured`, {
@@ -19,6 +24,10 @@ export default function FeaturedProducts() {
       return res.data;
     },
   });
+  const loadingSpinner = useLoadingSpinner(isLoading);
+  if (loadingSpinner) {
+    return loadingSpinner;
+  }
 
   const handleVotes = async (id) => {
     const userId = localStorage.getItem(user._id);
