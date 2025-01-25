@@ -3,12 +3,16 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
+import useLoadingSpinner from "../../hooks/useLoadingSpinner";
 
 export default function MyProducts() {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-
-  const { data: products = [], refetch } = useQuery({
+  const {
+    data: products = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["products", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/products?email=${user.email}`, {
@@ -16,90 +20,15 @@ export default function MyProducts() {
           Authorization: `Bearer ${localStorage.getItem("access-token")}`,
         },
       });
-      console.log("Fetched products data:", res.data);
       return res.data;
     },
     enabled: !!user?.email,
   });
-  console.log(products);
-  // const handleDeleteUser = async () => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: `You won't be able to revert this action for ${
-  //       user.displayName || user.name
-  //     }!`,
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, delete it!",
-  //     cancelButtonText: "Cancel",
-  //   }).then(async (result) => {
-  //     if (result.isConfirmed) {
-  //       try {
-  //         const token = localStorage.getItem("access-token");
-  //         if (!token) {
-  //           Swal.fire("Error!", "No access token found!", "error");
-  //           return;
-  //         }
 
-  //         // Call the API to delete the user
-  //         const res = await axiosSecure.delete(`/product/${result.id}`, {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         });
-
-  //         if (res.data.deletedCount > 0) {
-  //           refetch(); // Update the UI after successful deletion
-  //           Swal.fire(
-  //             "Deleted!",
-  //             `${user.name} has been deleted successfully.`,
-  //             "success"
-  //           );
-  //         } else {
-  //           Swal.fire(
-  //             "Error!",
-  //             "Failed to delete the user. Try again later.",
-  //             "error"
-  //           );
-  //         }
-  //       } catch (error) {
-  //         Swal.fire(
-  //           "Error!",
-  //           `Failed to delete the user: ${error.message}`,
-  //           "error"
-  //         );
-  //       }
-  //     } else {
-  //       Swal.fire("Cancelled", "Your action has been cancelled.", "info");
-  //     }
-  //   });
-  // };
-  const handleUpadate = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/product/${id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            refetch();
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-          }
-        });
-      }
-    });
-  };
+  const loadingSpinner = useLoadingSpinner(isLoading);
+  if (loadingSpinner) {
+    return loadingSpinner;
+  }
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -129,7 +58,7 @@ export default function MyProducts() {
   return (
     <div>
       <h1>My Products</h1>
-      <div className=" overflow-x-auto">
+      <div className="overflow-x-auto">
         <p>Total Products: {products.length}</p>
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
@@ -184,7 +113,6 @@ export default function MyProducts() {
           </tbody>
         </table>
       </div>
-      {/* <div className="hidden">{<UpadateProduct product={products} />}</div> */}
     </div>
   );
 }
