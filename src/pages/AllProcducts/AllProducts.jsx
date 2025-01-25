@@ -62,7 +62,7 @@ export default function AllProducts() {
   };
 
   const handleVotes = async (id) => {
-    const userId = localStorage.getItem(user?._id);
+    const userId = localStorage.getItem(products._id, user._id);
     try {
       const res = await axiosPublic.patch(
         `/product-votes/${id}`,
