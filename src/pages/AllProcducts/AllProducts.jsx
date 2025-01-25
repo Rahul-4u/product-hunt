@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import useDebounce from "../../hooks/useDebounenc";
 import useAuth from "../../hooks/useAuth";
+import useLoadingSpinner from "../../hooks/useLoadingSpinner";
 
 export default function AllProducts() {
   const { user } = useAuth();
@@ -13,7 +14,11 @@ export default function AllProducts() {
   const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearch = useDebounce(searchFun, 500);
 
-  const { data = {}, refetch } = useQuery({
+  const {
+    data = {},
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["products", debouncedSearch, currentPage],
     queryFn: async () => {
       const res = await axiosPublic.get(
@@ -28,6 +33,10 @@ export default function AllProducts() {
       return res.data;
     },
   });
+  const loadingSpinner = useLoadingSpinner(isLoading);
+  if (loadingSpinner) {
+    return loadingSpinner;
+  }
 
   const { products = [], total = 0, pages = 0 } = data;
 
