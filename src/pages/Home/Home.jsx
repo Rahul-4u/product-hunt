@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import Banner from "../../components/home/Banner";
 import CouponSlider from "../../components/home/CouponSlider";
 import FeaturedProducts from "../../components/home/FeaturedProducts";
@@ -9,6 +10,7 @@ export default function Home() {
       <Banner />
       <FeaturedProducts />
       <TrendingProducts />
+
       <CouponSlider />
     </div>
   );

@@ -112,6 +112,14 @@ export default function TrendingProducts() {
           ))}
         </div>
       </div>
+      <div className="w-11/12 flex my-10">
+        <NavLink
+          to={"/all-products"}
+          className="text-xl btn  mx-auto  bg-orange-500 p-2 rounded-b-md font-bold"
+        >
+          Show All Products
+        </NavLink>
+      </div>
     </div>
   );
 }

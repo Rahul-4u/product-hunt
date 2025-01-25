@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
+import { NavLink } from "react-router-dom";
 
 export default function ProductCard({
   product,
@@ -73,6 +74,11 @@ export default function ProductCard({
           <p className="text-gray-500 text-sm">Upvotes: {product?.upvotes}</p>
         </div>
         <div className="flex items-center justify-between mt-4">
+          <button className="btn bg-green-700 px-3 py-1 rounded-md">
+            <NavLink to={`/all-product/${product._id}`} className="text-white">
+              Details
+            </NavLink>
+          </button>
           <button
             onClick={() => handleVotes(product?._id)}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
