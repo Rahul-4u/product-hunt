@@ -26,6 +26,7 @@ import Payment from "../pages/Shared/Payment";
 import ErrorPage from "../pages/Shared/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import ContactPage from "../pages/ContactPage";
+import About from "../pages/about/About";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactPage />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
       {
         path: "/reviews-data/:id",

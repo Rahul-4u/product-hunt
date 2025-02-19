@@ -52,6 +52,12 @@ const NavBar = () => {
               </Link>
             </li>
 
+            <li>
+              <Link to="/about" className="hover:text-orange-500">
+                About Us
+              </Link>
+            </li>
+
             {user ? (
               <li>
                 <Link to="/subscrip" className="hover:text-orange-500">

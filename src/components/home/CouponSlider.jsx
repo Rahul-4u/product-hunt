@@ -21,7 +21,9 @@ const CouponSlider = () => {
 
   return (
     <div className="mt-12 px-4 md:px-8 my-20 lg:px-16">
-      <h2 className="text-3xl font-bold mb-6 text-center">Valid Coupons</h2>
+      <h2 className="text-5xl font-extrabold text-center py-20">
+        Valid Coupons
+      </h2>
       <Carousel
         showArrows={true}
         autoPlay={true}
