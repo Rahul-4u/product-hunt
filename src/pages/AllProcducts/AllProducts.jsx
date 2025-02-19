@@ -9,7 +9,7 @@ import useLoadingSpinner from "../../hooks/useLoadingSpinner";
 import { FaSearch } from "react-icons/fa";
 
 export default function AllProducts() {
-  const { user } = useAuth();
+  const { user, darkMode } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [searchFun, setSearchFun] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -87,82 +87,90 @@ export default function AllProducts() {
   );
 
   return (
-    <div className="max-w-[1440px] mx-auto py-12 px-6">
-      {/* Search Bar */}
-      <div className="relative w-full max-w-lg mx-auto">
-        <input
-          type="text"
-          value={searchFun}
-          onChange={(e) => setSearchFun(e.target.value)}
-          placeholder="Search products..."
-          className="w-full p-4 pl-12 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md transition-all duration-300"
-        />
-        <FaSearch className="absolute left-4 top-4 text-gray-500" />
-      </div>
+    <div
+      className={` ${
+        darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      <div
+        className={`max-w-[1440px] mx-auto py-12 px-6 ${
+          darkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+        }`}
+      >
+        {/* Search Bar */}
+        <div className="relative w-full max-w-lg mx-auto mt-20">
+          <input
+            type="text"
+            value={searchFun}
+            onChange={(e) => setSearchFun(e.target.value)}
+            placeholder="Search products..."
+            className="w-full p-4 pl-12 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md transition-all duration-300"
+          />
+          <FaSearch className="absolute left-4 top-4 text-gray-500" />
+        </div>
 
-      {/* Total Products */}
-      <p className="text-center text-gray-500 mt-4 text-lg">
-        {total > 0 ? `${total} products found` : "No products found"}
-      </p>
+        {/* Total Products */}
+        <p className="text-center mt-4 text-lg">
+          {total > 0 ? `${total} products found` : "No products found"}
+        </p>
 
-      {/* Product Grid */}
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <ProductCard
-              key={product._id}
-              product={product}
-              handleReport={handleReport}
-              handleVotes={handleVotes}
-              userId={localStorage.getItem("user-id")}
-            />
-          ))
-        ) : (
-          <p className="text-center text-gray-600">
-            No unreported products available.
-          </p>
-        )}
-      </div>
+        {/* Product Grid */}
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                handleReport={handleReport}
+                handleVotes={handleVotes}
+                userId={localStorage.getItem("user-id")}
+              />
+            ))
+          ) : (
+            <p className="text-center">No unreported products available.</p>
+          )}
+        </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center items-center mt-10 space-x-2">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage((prev) => prev - 1)}
-          className={`px-5 py-2.5 rounded-lg shadow-md transition-all ${
-            currentPage === 1
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-blue-500 text-white hover:bg-blue-600"
-          }`}
-        >
-          Previous
-        </button>
-
-        {Array.from({ length: pages }, (_, index) => (
+        {/* Pagination */}
+        <div className="flex justify-center items-center mt-10 space-x-2">
           <button
-            key={index}
-            onClick={() => setCurrentPage(index + 1)}
-            className={`px-5 py-2.5 rounded-lg transition-all ${
-              currentPage === index + 1
-                ? "bg-blue-600 text-white shadow-lg"
-                : "bg-gray-200 hover:bg-gray-300"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+            className={`px-5 py-2.5 rounded-lg shadow-md transition-all ${
+              currentPage === 1
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
             }`}
           >
-            {index + 1}
+            Previous
           </button>
-        ))}
 
-        <button
-          disabled={currentPage === pages}
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-          className={`px-5 py-2.5 rounded-lg shadow-md transition-all ${
-            currentPage === pages
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-blue-500 text-white hover:bg-blue-600"
-          }`}
-        >
-          Next
-        </button>
+          {Array.from({ length: pages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(index + 1)}
+              className={`px-5 py-2.5 rounded-lg transition-all ${
+                currentPage === index + 1
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+
+          <button
+            disabled={currentPage === pages}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            className={`px-5 py-2.5 rounded-lg shadow-md transition-all ${
+              currentPage === pages
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+            }`}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
