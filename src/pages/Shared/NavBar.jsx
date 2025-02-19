@@ -51,6 +51,7 @@ const NavBar = () => {
                 Products
               </Link>
             </li>
+
             {user ? (
               <li>
                 <Link to="/subscrip" className="hover:text-orange-500">
@@ -64,6 +65,11 @@ const NavBar = () => {
                 </Link>
               </li>
             )}
+            <li>
+              <Link to="/contact" className="hover:text-orange-500">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="flex items-center space-x-4 navbar-end">

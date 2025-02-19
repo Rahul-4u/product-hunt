@@ -25,6 +25,7 @@ import SubscriptionPage from "../pages/Shared/SubscriptionPage";
 import Payment from "../pages/Shared/Payment";
 import ErrorPage from "../pages/Shared/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import ContactPage from "../pages/ContactPage";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             <HomeAllCardDetails />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/contact",
+        element: <ContactPage />,
       },
       {
         path: "/reviews-data/:id",
