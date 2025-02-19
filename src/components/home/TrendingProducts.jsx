@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import useLoadingSpinner from "../../hooks/useLoadingSpinner";
 
 export default function TrendingProducts() {
-  const { user } = useAuth();
+  const { user, darkMode } = useAuth();
   const axiosPublic = useAxiosPublic();
   const {
     data: products = [],
@@ -50,26 +50,27 @@ export default function TrendingProducts() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-gray-200 py-16">
+    <div
+      className={`${
+        darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900"
+      } py-16`}
+    >
       <div className="container mx-auto px-6 lg:px-16">
-        {/* Section Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-5xl font-extrabold text-gray-900">
-            🔥 Trending Products
-          </h2>
-          <p className="text-gray-600 mt-3 text-lg">
+          <h2 className="text-5xl font-extrabold">🔥 Trending Products</h2>
+          <p className="mt-3 text-lg">
             Check out the hottest trending products right now!
           </p>
         </div>
 
-        {/* Products Grid */}
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
             <div
               key={product._id}
-              className="relative bg-white bg-opacity-60 backdrop-blur-lg shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2 duration-300"
+              className={`relative ${
+                darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
+              } shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2 duration-300`}
             >
-              {/* Image Section */}
               <div className="relative">
                 <img
                   className="w-full h-64 object-cover rounded-t-2xl transform hover:scale-105 transition-transform duration-300"
@@ -81,19 +82,13 @@ export default function TrendingProducts() {
                 </div>
               </div>
 
-              {/* Content */}
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-800">
-                  {product.name}
-                </h3>
-                <p className="text-gray-600 mt-2 line-clamp-2">
-                  {product.description}
-                </p>
-                <p className="text-sm text-gray-500 mt-1">
+                <h3 className="text-2xl font-bold">{product.name}</h3>
+                <p className="mt-2 line-clamp-2">{product.description}</p>
+                <p className="text-sm mt-1">
                   {new Date(product.timestamp).toDateString()}
                 </p>
 
-                {/* Tags */}
                 <div className="flex flex-wrap gap-2 mt-3">
                   {product?.tags?.map((tag, index) => (
                     <span
@@ -105,13 +100,11 @@ export default function TrendingProducts() {
                   ))}
                 </div>
 
-                {/* Price & Vote Section */}
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-xl font-semibold text-green-700">
                     💲 {product.price}
                   </span>
 
-                  {/* Vote Button */}
                   <button
                     onClick={() => handleVotes(product._id, user._id)}
                     className="flex items-center gap-1 px-4 py-1.5 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg hover:scale-105 transition transform"
@@ -121,7 +114,6 @@ export default function TrendingProducts() {
                   </button>
                 </div>
 
-                {/* Details Button */}
                 <div className="mt-4">
                   <NavLink
                     to={`/all-product/${product._id}`}
@@ -136,7 +128,6 @@ export default function TrendingProducts() {
         </div>
       </div>
 
-      {/* Show All Products Button */}
       <div className="w-full flex mt-10">
         <NavLink
           to={"/all-products"}
