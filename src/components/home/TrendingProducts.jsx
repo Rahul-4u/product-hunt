@@ -56,7 +56,7 @@ export default function TrendingProducts() {
       } py-16`}
     >
       <div className="container mx-auto px-6 lg:px-16">
-        <div className="text-center mb-12">
+        <div className="text-center pb-12">
           <h2 className="text-5xl font-extrabold">🔥 Trending Products</h2>
           <p className="mt-3 text-lg">
             Check out the hottest trending products right now!
