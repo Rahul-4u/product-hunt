@@ -10,10 +10,13 @@ import {
 } from "firebase/auth";
 import auth from "../firebase.config.js/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import useDarkMode from "../coustomHock/userDarkMode";
 
 export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
+  const [darkMode, setDarkMode] = useDarkMode();
+
   const axiosPublic = useAxiosPublic();
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
@@ -88,6 +91,8 @@ export default function AuthProvider({ children }) {
     googleLogin,
     login,
     logOut,
+    darkMode,
+    setDarkMode,
   };
 
   return (
