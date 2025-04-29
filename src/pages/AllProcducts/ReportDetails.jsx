@@ -20,6 +20,8 @@ export default function ReportDetails() {
     },
   });
 
+  
+
   // Fetch the main product
   const { data: mainProduct = {}, isLoading: productLoading } = useQuery({
     queryKey: ["report-details", id],

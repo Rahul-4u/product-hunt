@@ -4,12 +4,9 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useLoadingSpinner from "../../hooks/useLoadingSpinner";
-import { useContext } from "react";
-import { AuthContext } from "../../provider/AuthProvider";
 
 export default function FeaturedProducts() {
-  const { user } = useAuth();
-  const { darkMode } = useContext(AuthContext);
+  const { user, darkMode } = useAuth();
   const axiosPublic = useAxiosPublic();
   const {
     data: products = [],

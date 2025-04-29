@@ -42,7 +42,7 @@ export default function ManageUser() {
           }
         );
 
-        if (res.data.modifiedCount > 0) {
+        if (res.data.modifiedCount) {
           refetch();
           alert(`${user.name} has been made an Admin`);
         }

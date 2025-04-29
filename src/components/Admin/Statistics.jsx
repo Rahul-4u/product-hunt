@@ -30,7 +30,7 @@ const Statistics = () => {
     }, // Green
     {
       name: "Pending Products",
-      value: statis.pendingProduct || 0,
+      value: statis.totalUser || 0,
       color: "#FF9800",
     }, // Orange
     {
