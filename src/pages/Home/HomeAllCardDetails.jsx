@@ -10,7 +10,7 @@ import useAuth from "../../hooks/useAuth";
 export default function HomeAllCardDetails() {
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
-  const { user } = useAuth();
+  const { user, darkMode } = useAuth();
 
   const {
     data: product = {},
@@ -52,10 +52,10 @@ export default function HomeAllCardDetails() {
     }
   };
 
-  if (isLoading) return <div className="text-center">Loading...</div>;
+  if (isLoading) return <div className="text-center py-10">Loading...</div>;
   if (isError)
     return (
-      <div className="text-center text-red-500">
+      <div className="text-center text-red-500 py-10">
         Error loading product details. Please try again later.
       </div>
     );
@@ -73,18 +73,28 @@ export default function HomeAllCardDetails() {
     ownerImage,
   } = product;
 
+  const themeClasses = darkMode
+    ? "bg-gray-900 text-white"
+    : "bg-white text-gray-900";
+  const cardClasses = darkMode
+    ? "bg-gray-800 border-gray-700"
+    : "bg-gray-100 border-gray-300";
+  const textMuted = darkMode ? "text-gray-400" : "text-gray-600";
+
   return (
-    <div className="container mx-auto p-4 w-11/12">
+    <div className={`container mx-auto p-4 w-11/12 ${themeClasses}`}>
       {/* Product Details Section */}
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
-        <div className="p-6 border-2">
-          <div className="flex justify-between">
+      <div
+        className={`${cardClasses} shadow-lg rounded-xl mt-20 overflow-hidden`}
+      >
+        <div className="p-6 border rounded-lg">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-4">
             <img
               src={photo || "/default-product.jpg"}
               alt={name}
-              className="w-1/5 rounded-md md:h-32 object-cover"
+              className="w-full md:w-1/4 h-auto rounded-md object-cover"
             />
-            <div className="flex gap-2">
+            <div className="flex gap-2 md:flex-col md:items-end">
               <Button.Group>
                 <Button color="gray">
                   <LiaExternalLinkAltSolid className="mr-1" />
@@ -92,6 +102,7 @@ export default function HomeAllCardDetails() {
                     href={websiteLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="hover:underline"
                   >
                     Visit Website
                   </a>
@@ -103,10 +114,11 @@ export default function HomeAllCardDetails() {
               </Button.Group>
             </div>
           </div>
-          <div className="mt-4">
-            <h2 className="text-xl font-semibold">{name}</h2>
-            <p className="text-gray-600">{description}</p>
-            <p className="mt-2">
+
+          <div className="mt-6 space-y-2">
+            <h2 className="text-2xl font-bold">{name}</h2>
+            <p className={`${textMuted}`}>{description}</p>
+            <p>
               <strong>Condition:</strong> {condition || "Not specified"}
             </p>
             <p>
@@ -115,7 +127,7 @@ export default function HomeAllCardDetails() {
             <p>
               <strong>Owner:</strong> {ownerName || "Unknown"}
             </p>
-            <p className="text-gray-500 text-sm">
+            <p className={`text-sm ${textMuted}`}>
               Posted on: {new Date(timestamp).toLocaleString()}
             </p>
           </div>
